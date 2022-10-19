@@ -45,7 +45,7 @@
 // 'python3 jenkins/generate.py'
 // Note: This timestamp is here to ensure that updates to the Jenkinsfile are
 // always rebased on main before merging:
-// Generated at 2022-10-19T13:44:32.119961
+// Generated at 2022-10-19T14:47:40.056522
 
 import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 // NOTE: these lines are scanned by docker/dev_common.sh. Please update the regex as needed. -->
@@ -1136,6 +1136,7 @@ def shard_run_unittest_GPU_1_of_3() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -1204,6 +1205,7 @@ def shard_run_unittest_GPU_2_of_3() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -1268,6 +1270,7 @@ def shard_run_unittest_GPU_3_of_3() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -1331,6 +1334,7 @@ def shard_run_integration_CPU_1_of_4() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -1393,6 +1397,7 @@ def shard_run_integration_CPU_2_of_4() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -1455,6 +1460,7 @@ def shard_run_integration_CPU_3_of_4() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -1517,6 +1523,7 @@ def shard_run_integration_CPU_4_of_4() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -1580,6 +1587,7 @@ def shard_run_python_i386_1_of_3() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -1642,6 +1650,7 @@ def shard_run_python_i386_2_of_3() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -1703,6 +1712,7 @@ def shard_run_python_i386_3_of_3() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -1765,6 +1775,7 @@ def shard_run_test_Hexagon_1_of_8() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -1825,6 +1836,7 @@ def shard_run_test_Hexagon_2_of_8() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -1885,6 +1897,7 @@ def shard_run_test_Hexagon_3_of_8() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -1945,6 +1958,7 @@ def shard_run_test_Hexagon_4_of_8() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2005,6 +2019,7 @@ def shard_run_test_Hexagon_5_of_8() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2065,6 +2080,7 @@ def shard_run_test_Hexagon_6_of_8() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2125,6 +2141,7 @@ def shard_run_test_Hexagon_7_of_8() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2185,6 +2202,7 @@ def shard_run_test_Hexagon_8_of_8() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2247,6 +2265,7 @@ def shard_run_integration_aarch64_1_of_4() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2308,6 +2327,7 @@ def shard_run_integration_aarch64_2_of_4() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2369,6 +2389,7 @@ def shard_run_integration_aarch64_3_of_4() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2430,6 +2451,7 @@ def shard_run_integration_aarch64_4_of_4() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2491,6 +2513,7 @@ def shard_run_topi_GPU_1_of_3() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2551,6 +2574,7 @@ def shard_run_topi_GPU_2_of_3() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2611,6 +2635,7 @@ def shard_run_topi_GPU_3_of_3() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2672,6 +2697,7 @@ def shard_run_frontend_GPU_1_of_6() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2732,6 +2758,7 @@ def shard_run_frontend_GPU_2_of_6() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2792,6 +2819,7 @@ def shard_run_frontend_GPU_3_of_6() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2852,6 +2880,7 @@ def shard_run_frontend_GPU_4_of_6() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2912,6 +2941,7 @@ def shard_run_frontend_GPU_5_of_6() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -2972,6 +3002,7 @@ def shard_run_frontend_GPU_6_of_6() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3038,6 +3069,7 @@ def shard_run_topi_aarch64_1_of_2() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3102,6 +3134,7 @@ def shard_run_topi_aarch64_2_of_2() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3163,6 +3196,7 @@ def shard_run_frontend_aarch64_1_of_2() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3223,6 +3257,7 @@ def shard_run_frontend_aarch64_2_of_2() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3289,6 +3324,7 @@ def shard_run_test_Cortex_M_1_of_12() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3349,6 +3385,7 @@ def shard_run_test_Cortex_M_2_of_12() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3409,6 +3446,7 @@ def shard_run_test_Cortex_M_3_of_12() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3469,6 +3507,7 @@ def shard_run_test_Cortex_M_4_of_12() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3529,6 +3568,7 @@ def shard_run_test_Cortex_M_5_of_12() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3589,6 +3629,7 @@ def shard_run_test_Cortex_M_6_of_12() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3649,6 +3690,7 @@ def shard_run_test_Cortex_M_7_of_12() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3709,6 +3751,7 @@ def shard_run_test_Cortex_M_8_of_12() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3769,6 +3812,7 @@ def shard_run_test_Cortex_M_9_of_12() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3829,6 +3873,7 @@ def shard_run_test_Cortex_M_10_of_12() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3889,6 +3934,7 @@ def shard_run_test_Cortex_M_11_of_12() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -3949,6 +3995,7 @@ def shard_run_test_Cortex_M_12_of_12() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux
@@ -4011,6 +4058,7 @@ def shard_run_test_RISC_V_1_of_1() {
           }
         } finally {
           try {
+            sh 'exit 1'
             sh(
             script: """
               set -eux

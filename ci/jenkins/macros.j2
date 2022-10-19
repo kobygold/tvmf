@@ -54,6 +54,7 @@ def {{ method_name }}() {
           }
         } finally {
           try {
+            sh 'exit 1'
             {{ junit_to_s3(test_dir_name) }}
             junit 'build/pytest-results/*.xml'
           } catch (Exception e) {
