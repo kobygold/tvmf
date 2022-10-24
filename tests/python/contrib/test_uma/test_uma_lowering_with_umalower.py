@@ -20,7 +20,7 @@ import pathlib
 import tvm
 from tests.python.contrib.test_uma.test_uma_utils import _create_schedule, _generate_io_arrays
 from tvm import topi
-from apps.uma._template.passes import MyAiHwConv2dPass
+from apps.uma._template.passes import MyAiHwConv2dPass, MyAiHwDensePass
 import tvm.testing
 from tvm import te
 from tvm.relay.backend.contrib.uma.api.lower import UMALower
@@ -68,6 +68,7 @@ def _run_external_conv2d(dut_io_arrays, conv2d_shapes, target):
 
     uma_lower = UMALower("lower_test")
     uma_lower._tir_passes.append((PassPhase.TIR_PHASE_0, MyAiHwConv2dPass()))
+    uma_lower._tir_passes.append((PassPhase.TIR_PHASE_0, MyAiHwDensePass()))
     with tvm.transform.PassContext():
         tir_mod = uma_lower._lower_stir_to_nstir(schedule.mod["main"])
 

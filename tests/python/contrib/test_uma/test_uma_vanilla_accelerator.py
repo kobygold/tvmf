@@ -21,6 +21,7 @@ from tvm.relay.backend.contrib.uma.api.utils import PassPhase
 from tvm.relay.backend.contrib.uma.backend import UMABackend
 from apps.uma._template.passes import (
     MyAiHwConv2dPass as VanillaAcceleratorConv2dPass,
+    MyAiHwDensePass as VanillaAcceleratorDensePass,
 )
 from apps.uma._template.codegen import gen_includes
 
@@ -46,6 +47,7 @@ class VanillaAcceleratorBackend(UMABackend):
         # Relay to TIR function registration
         #######################################################################
         self._register_tir_pass(PassPhase.TIR_PHASE_0, VanillaAcceleratorConv2dPass())
+        self._register_tir_pass(PassPhase.TIR_PHASE_0, VanillaAcceleratorDensePass())
 
         #######################################################################
         # TIR to runtime function registration

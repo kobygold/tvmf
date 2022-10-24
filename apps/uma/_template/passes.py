@@ -102,6 +102,82 @@ class MyAiHwConv2dPass:
         return r
 
 
+@tvm.tir.transform.prim_func_pass(opt_level=2)
+class MyAiHwDensePass:
+    _EXTERNAL_FUNCTION_NAME = "my_ai_hw_dense"
+    _TVM_BLOCK_MATCH_NAME = "T_matmul_NT"
+
+    def transform_function(
+        self, func: tvm.tir.PrimFunc, mod: tvm.ir.IRModule, ctx: tvm.ir.transform.PassContext
+    ) -> tvm.tir.PrimFunc:
+        return self._my_ai_hw_dense_pass(func, mod, ctx)
+
+    @classmethod
+    def _my_ai_hw_dense_pass(cls, func, mod, ctx):
+        _loops = dict()
+        _handles = []
+        _entry_node = None
+
+        def _has_block(name: str, func: tvm.tir.PrimFunc) -> bool:
+            """
+            Determine of a tir.block with `name` exists in `func`
+            """
+
+            def _hb(op):
+                if isinstance(op, tvm.tir.Block):
+                    _found_blocks.append(op.name_hint)
+
+            _found_blocks = []
+            tvm.tir.stmt_functor.post_order_visit(func.body, _hb)
+            return name in _found_blocks
+
+        def _detect_and_replace_dense(
+            func: tvm.tir.PrimFunc, mod: tvm.ir.IRModule, ctx: tvm.ir.transform.PassContext
+        ) -> tvm.tir.PrimFunc:
+            def _replace_dense(op):
+                if op == _entry_node:
+                    irb = tvm.tir.ir_builder.create()
+                    # Collection of buffer address
+                    buffers = [b[1].data for b in _handles]
+                    # extraction of loop offsets
+                    for k, v in _loops.items():
+                        assert v.min.value == 0
+                    offset_order = ["ilen", "olen", "dummy"]
+                    offsets = [_loops[i].extent.value for i in offset_order]
+                    args = buffers + offsets
+                    irb.emit(tir_call(irb, True, cls._EXTERNAL_FUNCTION_NAME, *args))
+                    irb_result = irb.get()
+                    return irb_result
+                elif isinstance(op, tvm.tir.SeqStmt):
+                    # Remove that pad block of TOPI's conv2DNCHW by only returning the 2nd statement
+                    return op.seq[1]
+                return op
+
+            sch = tir.Schedule(func)
+
+            if _has_block(cls._TVM_BLOCK_MATCH_NAME, func):
+                dense_block = sch.get_block(cls._TVM_BLOCK_MATCH_NAME)
+                rv_loops = sch.get_loops(dense_block)
+                assert len(rv_loops) == 3
+                loops = dict(
+                    dummy=rv_loops[0],
+                    olen=rv_loops[1],
+                    ilen=rv_loops[2],
+                )
+                _entry_node = sch.get(rv_loops[1])
+                _loops = {k: sch.get(v) for k, v in loops.items()}
+                _handles = func.buffer_map.items()
+
+                x = tvm.tir.stmt_functor.ir_transform(
+                    func.body, None, _replace_dense, ["tir.For", "tir.SeqStmt"]
+                )
+                return func.with_body(x)
+            else:
+                return func
+
+        r = _detect_and_replace_dense(func, mod, ctx)
+        return r
+
 def tir_call(ib: tvm.tir.ir_builder, extern: bool, name: str, *args):
     """
     ib: ir_builder

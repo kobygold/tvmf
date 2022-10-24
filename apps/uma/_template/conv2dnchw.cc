@@ -94,3 +94,17 @@ extern "C"
   free(pad_temp);
   return 0;
 }
+
+
+int my_ai_hw_dense(float* ifmap, float* weights, float* result, int ilen, int olen, int dummy)
+{
+  for (int32_t i1 = 0; i1 < olen; ++i1) {
+    for (int32_t i2 = 0; i2 < ilen; ++i2) {
+      if (i2 == 0) {
+        result[i1] = 0.000000e+00f;
+      }
+      result[i1] = (result[i1] + (ifmap[i2] * weights[((i1 * ilen) + i2)]));
+    }
+  }
+  return 0;
+}
